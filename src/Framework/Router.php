@@ -42,7 +42,18 @@ class Router
 	            $container->resolve($class) :
 	            new $class;
 
-            $controllerInstance->{$function}();
+            $action = fn() => $controllerInstance->{$function}();
+
+			foreach ($this->middleware as $middleware) {
+				$middlewareInstance = $container ?
+					$container->resolve($middleware) :
+					new $middleware;
+				$action = fn() => $middlewareInstance->process($action);
+			}
+
+			$action();
+
+			return;
         }
     }
 

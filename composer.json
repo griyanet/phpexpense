@@ -20,6 +20,6 @@
         ]
     },
     "scripts": {
-        "phpiggy": "php cli.php"
+        "phpiggy": "php mycli.php"
     }
 }

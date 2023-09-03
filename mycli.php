@@ -1,16 +1,19 @@
 <?php
 
-$driver = 'mysql';
-$config = http_build_query(data: [
-	'host' => 'localhost',
-	'port' => '3306',
-	'dbname' => 'phpiggy'
-], arg_separator: ';');
+include __DIR__ . '/src/Framework/Database.php';
 
-$dsn = "{$driver}:{$config}";
-$username = 'root';
-$password = '';
-
-$db = new PDO($dsn, $username, $password);
-
-echo "Connected to Database";
+//use Framework\Database;
+//
+//$db = new Database('mysql', [
+//	'host' => 'localhost',
+//	'port' => 3306,
+//	'dbname' => 'phpiggy'
+//], 'root', '');
+//
+//$search = "Hat";
+//$query = "SELECT * FROM products WHERE name=:name";
+//$stmt = $db->connection->prepare($query);
+//$stmt->bindValue('name', $search, PDO::PARAM_STR);
+//$stmt->execute();
+//
+//var_dump($stmt->fetchAll(PDO::FETCH_OBJ));

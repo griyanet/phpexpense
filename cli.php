@@ -1,16 +1,20 @@
 <?php
+declare(strict_types=1);
 
-$driver = 'mysql';
-$config = http_build_query( data: [
-	'host' => 'localhost',
-	'port' => '3306',
-	'dbname' => 'phpiggy'
-], arg_separator: ';');
+require __DIR__ . "/vendor/autoload.php";
 
-$dsn = "{$driver}:{$config}";
-$username = 'root';
-$password = '';
+use Framework\Database;
+use Dotenv\Dotenv;
+use App\Config\Paths;
 
-$db = new PDO($dsn, $username, $password);
+$dotenv = Dotenv::createImmutable(Paths::ROOT);
+$dotenv->load();
 
-echo "connected to database";
+$db = new Database($_ENV['DB_DRIVER'], [
+	'host' => $_ENV['DB_HOST'],
+	'port' => $_ENV['DB_PORT'],
+	'dbname' => $_ENV['DB_NAME']
+	], $_ENV['DB_USER'], $_ENV['DB_PASS']);
+
+$sqlFile = file_get_contents("./database.sql");
+$db->query($sqlFile);

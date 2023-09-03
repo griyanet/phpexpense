@@ -8,7 +8,10 @@
             "email": "griyanetcafe@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "vlucas/phpdotenv": "^5.5",
+      "ext-pdo": "*"
+    },
     "autoload": {
         "psr-4": {
             "Framework\\": "src/Framework",
@@ -20,6 +23,6 @@
         ]
     },
     "scripts": {
-        "phpiggy": "php mycli.php"
+        "phpiggy": "php cli.php"
     }
 }
